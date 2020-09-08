@@ -11,28 +11,25 @@ void SolveLinear(double a, double b)
 
     if (a == 0 && b != 0)
 
-     printf("No roots!\n");
+     printf("\tNo roots!\n");
 
 
     if (a == 0 && b == 0)
 
-     printf("Any number is a root!\n");
+     printf("\tAny number is a root!\n");
 
 
     if (a != 0)
 
      {
 
-       double AntiNegativeZero = -b / a;  // prints 0 istead of -0
+       if ((-b / a) == -0)// prints 0 istead of -0
 
-
-       if (AntiNegativeZero == -0)
-
-       printf("There is only one root: x = 0\n");
+       printf("\tThere is only one root: x = 0\n");
 
        else
 
-        printf("There is only one root: x = %lg\n", -b / a);
+        printf("\tThere is only one root: x = %lg\n", -b / a);
 
      }
 
@@ -51,7 +48,7 @@ void SolveQuadratic(double a, double b, double c)
 
             if ((b*b - 4*a*c) < 0)
 
-                  printf("No roots!\n");
+                  printf("\tNo roots!\n");
 
 
 
@@ -60,9 +57,9 @@ void SolveQuadratic(double a, double b, double c)
               {
 
 
-                  printf("There are two roots: x = %lg\n\n", (-b - sqrt(b*b - 4*a*c))/(2*a));
+                  printf("\tThere are two roots: x = %lg\n\n", (-b - sqrt(b*b - 4*a*c))/(2*a));
 
-                  printf("                     x = %lg\n", (-b + sqrt(b*b - 4*a*c))/(2*a));
+                  printf("\t                     x = %lg\n", (-b + sqrt(b*b - 4*a*c))/(2*a));
 
 
               }
@@ -73,16 +70,14 @@ void SolveQuadratic(double a, double b, double c)
 
               {
 
-                  double AntiNegativeZero= -b / a;  // prints 0 istead of -0
 
+                if ((-b / a) == -0)// prints 0 istead of -0
 
-                  if (AntiNegativeZero == -0)
+                printf("\tThere is only one root: x = 0\n");
 
-                    printf("There is only one root: x = 0\n");
+                else
 
-                  else
-
-                    printf("There is only one root: x = %lg\n", -b/(2*a));
+                printf("\tThere is only one root: x = %lg\n", -b / (2*a));
 
 
              }
@@ -104,55 +99,121 @@ void SolveQuadratic(double a, double b, double c)
 
 int main()
 {
-    double a = 0, b = 0, c = 0; // coeffs
 
 
+    double a = 0, b = 0, c = 0, var = 0; // coeffs and var to check input
+
+    int i = 0; //iteration counter for do...while loop
 
 
-    printf("\nQuadraticSolver by AG, v. 1.0\n");
-    printf("\nPlease, enter coeffs of a quadratic equation ax^2 + bx + c = 0\n\n");
+    printf("\n\tQuadraticSolver by AG, v. 1.1\n");
 
-
-
-
-    printf ("                   a = ");
-
-    scanf("%lg", &a);
-
-
-
-
-
-    printf("\n");
+    printf("\n\tPlease, enter coeffs of a quadratic equation ax^2 + bx + c = 0\n\n");
 
 
 
 
 
-    printf ("                   b = ");
+    do
+        {
 
-    scanf("%lg", &b);
-
-
-
-
-    printf("\n");
+            i++;
 
 
 
 
+            if (i != 1) //if this is not the first iteration, prints error message
 
-
-    printf ("                   c = ");
-
-    scanf("%lg", &c);
-
+            printf ("\tSeems like something is wrong with the input. Try again, please\n\n");
 
 
 
-    printf("\n");
 
 
+            printf ("                   a = ");
+
+            var = scanf("%lg", &a);
+
+            fflush(stdin);
+
+            printf("\n");
+
+
+        }  while (var != 1);
+
+
+    i = 0;
+
+
+
+
+
+
+
+    do
+        {
+
+            i++;
+
+
+
+
+            if (i != 1) //if this is not the first iteration, prints error message
+
+            printf ("\tSeems like something is wrong with the input. Try again, please\n\n");
+
+
+
+
+
+            printf ("                   b = ");
+
+            var = scanf("%lg", &b);
+
+            fflush(stdin);
+
+            printf("\n");
+
+
+        }  while (var != 1);
+
+
+    i = 0;
+
+
+
+
+
+
+
+    do
+        {
+
+            i++;
+
+
+
+
+            if (i != 1) //if this is not the first iteration, prints error message
+
+            printf ("\tSeems like something is wrong with the input. Try again, please\n\n");
+
+
+
+
+            printf ("                   c = ");
+
+            var = scanf("%lg", &c);
+
+            fflush(stdin);
+
+            printf("\n");
+
+
+        }  while (var != 1);
+
+
+    i = 0;
 
 
 
@@ -163,7 +224,7 @@ int main()
 
 
 
-    printf("\nThat's it!\n\n\n");
+    printf("\n\tThat's it!\n\n\n");
 
 
     return 0;
