@@ -2,24 +2,35 @@
 #include <stdlib.h>
 #include <math.h>
 
+const double epsilon = 1e-8;
+
+int is_zero(double a)
+{
+    if (fabs(a) < epsilon)
+    return 1;
+
+    else
+    return 0;
+}
+
 void SolveLinear(double a, double b)
 {
-    if ((a > -(1e-8) && a < 1e-8) && (b < -(1e-8) or b > 1e-8))
+    if (is_zero(a) && !is_zero(b))
      printf("\tNo roots!\n");
 
-    if ((a > -(1e-8) && a < 1e-8) && (b > -(1e-8) && b < 1e-8))
+    if (is_zero(a) && is_zero(b))
      printf("\tAny number is a root!\n");
 
-    if ((a < -(1e-8) or a > 1e-8) && (b < -(1e-8) or b > 1e-8))
+    if (!is_zero(a) && !is_zero(b))
      printf("\tThere is only one root: x = %lg\n", -b / a);
 
-    if ((a < -(1e-8) or a > 1e-8) && (b > -(1e-8) && b < 1e-8))
+    if (!is_zero(a) && is_zero(b))
      printf("\tThere is only one root: x = 0\n");
 }
 
 void SolveQuadratic(double a, double b, double c)
 {
-   if (a < -(1e-8) or a > 1e-8)
+   if (!is_zero(a))
    {
         if ((b*b - 4*a*c) < 0)
             printf("\tNo roots!\n");
@@ -30,9 +41,9 @@ void SolveQuadratic(double a, double b, double c)
                 printf("\t                     x = %lg\n", (-b + sqrt(b*b - 4*a*c))/(2*a));
               }
 
-        if ((b*b - 4*a*c) > -(1e-8) && (b*b - 4*a*c) < 1e-8)
+        if (is_zero(b*b - 4*a*c))
               {
-                if (b > -(1e-8) && b < 1e-8)// prints 0 istead of -0
+                if (is_zero(b))// prints 0 istead of -0
                 printf("\tThere is only one root: x = 0\n");
 
                 else
@@ -43,10 +54,6 @@ void SolveQuadratic(double a, double b, double c)
    else
    SolveLinear(b, c);
 }
-
-
-
-
 
 int main()
 {
