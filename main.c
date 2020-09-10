@@ -6,11 +6,7 @@ const double epsilon = 1e-8;
 
 int is_zero(double a)
 {
-    if (fabs(a) < epsilon)
-    return 1;
-
-    else
-    return 0;
+    return fabs(a) < epsilon;
 }
 
 void SolveLinear(double a, double b)
@@ -58,8 +54,7 @@ void SolveQuadratic(double a, double b, double c)
 int main()
 {
     double a = 0, b = 0, c = 0; // coeffs
-    int i = 0; //iteration counter for do...while loop
-    int var = 0; // var to check input
+    int i = 0; //iteration counter for do...while loop2
 
     printf("\n\tQuadraticSolver by AG, v. 1.2\n");
     printf("\n\tPlease, enter coeffs of a quadratic equation ax^2 + bx + c = 0\n\n");
@@ -72,11 +67,11 @@ int main()
             printf ("\tSeems like something is wrong with the input. Try again, please\n\n");
 
             printf ("                   a = ");
-            var = scanf("%lg", &a);
+            scanf("%lg", &a);
             fflush(stdin);
             printf("\n");
 
-        }  while (var != 1);
+        }  while (scanf("%lg", &a) != 1);
 
     i = 0;
 
@@ -88,11 +83,11 @@ int main()
             printf ("\tSeems like something is wrong with the input. Try again, please\n\n");
 
             printf ("                   b = ");
-            var = scanf("%lg", &b);
+            scanf("%lg", &b);
             fflush(stdin);
             printf("\n");
 
-        }  while (var != 1);
+        }  while (scanf("%lg", &b); != 1);
 
     i = 0;
 
@@ -104,11 +99,11 @@ int main()
             printf ("\tSeems like something is wrong with the input. Try again, please\n\n");
 
             printf ("                   c = ");
-            var = scanf("%lg", &c);
+            scanf("%lg", &c);
             fflush(stdin);
             printf("\n");
 
-        }  while (var != 1);
+        }  while (scanf("%lg", &c); != 1);
 
     i = 0;
 
