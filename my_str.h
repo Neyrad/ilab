@@ -1,4 +1,8 @@
-const int ERROR = -1;
+#include <stdlib.h>
+
+//-----------------------------------------------------------------
+
+const int ERROR = 238;
 
 //-----------------------------------------------------------------
 
@@ -53,19 +57,24 @@ char* my_strstr (char* str1, char* str2) {
 //-----------------------------------------------------------------
 
 int my_strcmp (const void* stringA, const void* stringB) {
+	const char* strAA = (const char*)stringA;
+	const char* strBB = (const char*)stringB;
+
 	int i = 0;
-	for (i = 0; *((char*)stringA + i) != '\0' && *((char*)stringB + i) != '\0'; ++i) {
-		if      (*((char*)stringA + i) < *((char*)stringB + i))
-			return 2;
-		else if (*((char*)stringA + i) > *((char*)stringB + i))
-			return 1;
+	for (i = 0; *(strAA + i) != '\0' 
+		 	 && *(strBB + i) != '\0'; ++i) {
+		if      (*(strAA + i) < *(strBB + i))
+			return -1;
+		else if (*(strAA + i) > *(strBB + i))
+			return  1;
 	}
-	if      (*((char*)stringA + i) == '\0' && *((char*)stringB + i) == '\0')
-		return 0;
-	else if (*((char*)stringA + i) == '\0')
+	if      (*(strAA + i) == '\0'
+		  && *(strBB + i) == '\0')
+		return  0;
+	else if (*(strAA + i) == '\0')
 		return -1;
-	else if (*((char*)stringB + i) == '\0')
-		return 1;
+	else if (*(strBB + i) == '\0')
+		return  1;
 	else
 		return ERROR;
 }
@@ -77,7 +86,7 @@ char*  my_strtok (char* ptr, const char* token) {
 	for (int j = 0; *(token + j) != '\0'; ++j) {
 		for (counter = 0; *(ptr + counter) != *(token + j)
 					   && *(ptr + counter) != '\0'; ++counter);
-		if (*(ptr + counter) == token) {
+		if (*(ptr + counter) == *(token + j)) {
 			*(ptr + counter) = '\0';
 			return ptr;
 		}
