@@ -1,3 +1,7 @@
+const int ERROR = -1;
+
+//-----------------------------------------------------------------
+
 int my_strlen (char* str);
 void my_strncopy (char* str2, char* str1, int size);
 char* my_strstr (char* str1, char* str2); 
