@@ -45,7 +45,7 @@ int main () {
  			printf ("%s\n", *(mass + i));
 	printf ("\n");
 
-	for (int i = 0; i < 3; ++i)
+	for (int i = 0; i < nStrings; ++i)
 		free (*(mass + i));
 
 	free (mass);
