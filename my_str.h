@@ -101,4 +101,3 @@ char* my_strncat (char* str1, char* str2) {
 	for (counter = 0; *(str1 + counter) != '\0'; ++counter);
 	for (int   i = 0; (*(str1 + counter + i) = *(str2 + i)) != '\0'; ++i);
 }
-
