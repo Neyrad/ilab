@@ -21,7 +21,6 @@ int main () {
 
 	printf ("\n  *** StringSorter by Neyrad, 2020 *** \n"  );
 	printf ("\n>>> How many strings do you want to sort?\n");
-	printf (  ">>> Blank ones will be ignored.\n"          );
 	printf ("\n>>> Enter a number: "                       );
 
 	fgets (str, sizeof (str), stdin);
@@ -35,17 +34,15 @@ int main () {
 	for (int i = 0; i < nStrings; ++i) 
 		*(mass + i) = (char*) calloc (MAX_SIZE, sizeof (char));
 
-	for (int i = 0; i < nStrings; ++i) {
+	for (int i = 0; i < nStrings; ++i)
 		getLine (*(mass + i), MAX_SIZE);
-		while (isBlank (*(mass + i)))
-			getLine (*(mass + i), MAX_SIZE);
-	}
 
 	qsort (mass, nStrings, sizeof (char*), my_strcmp);
 
 	printf ("\n>>> Output:\n\n");
-	for (int i = 0; i < nStrings; ++i) 	
- 		printf ("%s\n", *(mass + i));
+	for (int i = 0; i < nStrings; ++i)
+		if (!isBlank (*(mass + i)))
+ 			printf ("%s\n", *(mass + i));
 	printf ("\n");
 
 	for (int i = 0; i < 3; ++i)
