@@ -9,7 +9,8 @@ const int ERROR = 238;
 int my_strlen (char* str);
 void my_strncopy (char* str2, char* str1, int size);
 char* my_strstr (char* str1, char* str2); 
-int my_strcmp (const void* stringA, const void* stringB); 
+int my_strcmp (const void* stringA, const void* stringB);
+int isLetter (char X); 
 char*  my_strtok (char* ptr, const char* token);
 char* my_strncat (char* str1, char* str2);
 
@@ -60,23 +61,50 @@ int my_strcmp (const void* stringA, const void* stringB) {
 	const char* strAA = *((const char**) stringA);
 	const char* strBB = *((const char**) stringB);
 
-	int i = 0;
-	for (i = 0; *(strAA + i) != '\0' 
-		 	 && *(strBB + i) != '\0'; ++i) {
-		if      (*(strAA + i) < *(strBB + i))
+	int counter = 0;
+	int shiftAA = 0;
+	int shiftBB = 0;
+
+	for (counter = 0; *(strAA + counter) != '\0' 
+		 	 	   && *(strBB + counter) != '\0'; ++counter) {
+
+		shiftAA = 0;
+		shiftBB = 0;
+
+
+		for (shiftAA = 0; !isLetter (*(strAA + shiftAA))
+	       						  && *(strAA + shiftAA) != '\0'; ++shiftAA);
+		if (*(strAA + shiftAA) == '\0')
+			break;
+		
+		for (shiftBB = 0; !isLetter (*(strBB + shiftBB))
+								  && *(strBB + shiftBB) != '\0'; ++shiftBB);			
+		if (*(strBB + shiftBB) == '\0')
+			break;
+			
+
+		if      (*(strAA + shiftAA + counter) < *(strBB + shiftBB + counter))
 			return -1;
-		else if (*(strAA + i) > *(strBB + i))
+		else if (*(strAA + shiftAA + counter) > *(strBB + shiftBB + counter))
 			return  1;
 	}
-	if      (*(strAA + i) == '\0'
-		  && *(strBB + i) == '\0')
+
+	if      (*(strAA + shiftAA + counter) == '\0'
+		  && *(strBB + shiftBB + counter) == '\0')
 		return  0;
-	else if (*(strAA + i) == '\0')
+	else if (*(strAA + shiftAA + counter) == '\0')
 		return -1;
-	else if (*(strBB + i) == '\0')
+	else if (*(strBB + shiftBB + counter) == '\0')
 		return  1;
 	else
 		return ERROR;
+}
+
+//-----------------------------------------------------------------
+
+int isLetter (char X) {
+	return (X  >= 'A' &&  X <= 'Z') || (X  >= 'a' &&  X <= 'z');
+
 }
 
 //-----------------------------------------------------------------
@@ -101,3 +129,4 @@ char* my_strncat (char* str1, char* str2) {
 	for (counter = 0; *(str1 + counter) != '\0'; ++counter);
 	for (int   i = 0; (*(str1 + counter + i) = *(str2 + i)) != '\0'; ++i);
 }
+
