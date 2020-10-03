@@ -57,8 +57,8 @@ char* my_strstr (char* str1, char* str2) {
 //-----------------------------------------------------------------
 
 int my_strcmp (const void* stringA, const void* stringB) {
-	const char* strAA = (const char*)stringA;
-	const char* strBB = (const char*)stringB;
+	const char* strAA = *((const char**) stringA);
+	const char* strBB = *((const char**) stringB);
 
 	int i = 0;
 	for (i = 0; *(strAA + i) != '\0' 
@@ -87,7 +87,7 @@ char*  my_strtok (char* ptr, const char* token) {
 		for (counter = 0; *(ptr + counter) != *(token + j)
 					   && *(ptr + counter) != '\0'; ++counter);
 		if (*(ptr + counter) == *(token + j)) {
-			*(ptr + counter) = '\0';
+			*(ptr + counter)  = '\0';
 			return ptr;
 		}
 	}

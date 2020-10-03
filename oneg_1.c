@@ -1,7 +1,6 @@
 #include "my_str.h"
 #include <stdio.h>
 #include <assert.h>
-#include <string.h>
 
 //------------------------------------------------------------
 
@@ -11,37 +10,48 @@ const int END      =   -1;
 //------------------------------------------------------------
 
 int getLine (char to [], int length); 
-
+int isBlank (char* string);
+ 
 //------------------------------------------------------------
 
 int main () {
-	char* str1 = (char*) calloc (MAX_SIZE, sizeof (str1 [0]));
-	char* str2 = (char*) calloc (MAX_SIZE, sizeof (str2 [0]));
-	char* str3 = (char*) calloc (MAX_SIZE, sizeof (str3 [0]));
 
-	getLine (str1, MAX_SIZE);
-	getLine (str2, MAX_SIZE);
-	getLine (str3, MAX_SIZE);
+	int nStrings = -1;
+	char str [MAX_SIZE] = {};
 
-	char** mass = (char**) calloc (3, sizeof(char*));
-	
-	* mass      = str1;
-	*(mass + 1) = str2;
-	*(mass + 2) = str3;
+	printf ("\n  *** StringSorter by Neyrad, 2020 *** \n"  );
+	printf ("\n>>> How many strings do you want to sort?\n");
+	printf (  ">>> Blank ones will be ignored.\n"          );
+	printf ("\n>>> Enter a number: "                       );
 
-	printf ("before\nmass [0] = %s\n", * mass     );
- 	printf (		"mass [1] = %s\n", *(mass + 1));
- 	printf (		"mass [2] = %s\n", *(mass + 2));
+	fgets (str, sizeof (str), stdin);
+	while (sscanf (str, "%d", &nStrings) != 1) {
+		printf (">>> Wrong input. Try again please: ");
+		fgets (str, sizeof (str), stdin);
+	}
 
-	qsort (mass, 3, sizeof (char*), my_strcmp);
+	char **mass = (char**) calloc (nStrings, sizeof(char*));
 
-	printf ("after\nmass [0] = %s\n", * mass     );
- 	printf (	   "mass [1] = %s\n", *(mass + 1));
- 	printf (       "mass [2] = %s\n", *(mass + 2));
+	for (int i = 0; i < nStrings; ++i) 
+		*(mass + i) = (char*) calloc (MAX_SIZE, sizeof (char));
 
-	printf ("hand mode\nmy_strcmp (str1, str2) = %d\n", my_strcmp (str1, str2));
- 	printf (	       "my_strcmp (str2, str3) = %d\n", my_strcmp (str2, str3));
- 	printf (           "my_strcmp (str3, str1) = %d\n", my_strcmp (str3, str1));
+	for (int i = 0; i < nStrings; ++i) {
+		getLine (*(mass + i), MAX_SIZE);
+		while (isBlank (*(mass + i)))
+			getLine (*(mass + i), MAX_SIZE);
+	}
+
+	qsort (mass, nStrings, sizeof (char*), my_strcmp);
+
+	printf ("\n>>> Output:\n\n");
+	for (int i = 0; i < nStrings; ++i) 	
+ 		printf ("%s\n", *(mass + i));
+	printf ("\n");
+
+	for (int i = 0; i < 3; ++i)
+		free (*(mass + i));
+
+	free (mass);
 
 	return 0;
 }
@@ -64,7 +74,18 @@ int getLine (char to [], int length) {
 	to [i] = '\0';
 	
 	if (c == EOF) {
-		putchar('\n');
+		putchar ('\n');
 		return END;
 	}
+}
+
+//------------------------------------------------------------
+
+int isBlank (char* string) {
+	int counter = 0, blanks = 0;
+	for (counter = 0; *(string + counter) != '\0'; ++counter)
+		if (*(string + counter) == ' '
+	    ||  *(string + counter) == '\t')
+			++blanks;
+	return blanks == counter;
 }
