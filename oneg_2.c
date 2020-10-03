@@ -9,7 +9,7 @@ int main () {
 	FILE *text, *sorted;
 	char str [MAX_SIZE] = {};
 	char path [] = "hamlet.txt";
-	char path_out [] = "sorted.txt";
+	char path_out [] = "sortedDUMB.txt";
 	int nStrings = 0;
 
 	text = fopen (path, "r");
