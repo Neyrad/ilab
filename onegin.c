@@ -28,14 +28,14 @@ int main () {
 	FILE *text, *sorted;
 	wchar_t str [MAX_SIZE] = {};
 	const char path [] = "ONEGIN.txt";
-	const char path_out [] = "SORTED_ONEGIN.txt";
+	const char path_out [] = "ONEGIN_SORTED.txt";
 	int nStrings = 0;
 	int notletters = 0;
 	int length = 0;
 
 	text = fopen (path, "r");
 
-	while (fgetws (str, MAX_SIZE, text) != NULL)
+	while (fgetws (str, sizeof(wchar_t) * MAX_SIZE, text) != NULL)
 		++nStrings;
 
 	fclose (text);	
@@ -47,7 +47,7 @@ int main () {
 	text = fopen (path, "r");
 
 	for (int i = 0; i < nStrings; ++i) {
-		fgetws (*(mass + i), MAX_SIZE, text); //how can I put sizeof(...) 
+		fgetws (*(mass + i), sizeof(wchar_t) * MAX_SIZE, text); //how can I put sizeof(...) 
 		blankfix (*(mass + i));               //instead of MAX_SIZE ???
 	}
 
